@@ -32,10 +32,12 @@
 #pragma mark -
 #pragma mark change
 
-
- void realSingleMakeSingleComplex(	__CLPK_complex* matOut, 
-											__CLPK_real*	matIn, 
-											int				size	)
+/*!
+ convert a rsquare eal matrix of size into a complex matrix
+ */
+void realSingleMakeSingleComplex(__CLPK_complex*   matOut,
+                                  __CLPK_real*      matIn,
+                                  int				size	)
 {	int i,j;						
 	for ( i=0; i<size; i++){
 		for ( j=0; j<size; j++){
@@ -44,12 +46,13 @@
 	}
 }
 
-
-
- void realSingleToComplexSingleMultMatrix(	__CLPK_complex*		matOut, 
-													__CLPK_complex		scale, 
-													__CLPK_real*		matIn, 
-													int					size	)				// used for conveting the real stiffness matrix into comples fourier representation
+/*!
+ convert a real matrix to a complex matrix times a scale
+*/
+void realSingleToComplexSingleMultMatrix(__CLPK_complex*   matOut, 
+                                          __CLPK_complex    scale, 
+                                          __CLPK_real*      matIn, 
+                                          int               size	)				// used for conveting the real stiffness matrix into complex fourier representation
 {	
 	int i,j;
 	for ( i=0; i<size; i++){
@@ -71,40 +74,60 @@
 #pragma mark -
 
 #pragma mark vector
- void realSingleVectorScale(float* B, float* A, float beta, int length)
+/*!
+ scale a single precision vector
+ */
+void realSingleVectorScale(float* B, float* A, float beta, int length)
 {
 	float b = 1.0/beta;
 	vDSP_vsdiv (A, 1, &b, B, 1, length);
 } 
 
- void realDoubleVectorScale(double* B, double* A, double beta, int length)
+/*!
+ scale adouble precision vector
+ */
+void realDoubleVectorScale(double* B, double* A, double beta, int length)
 {
 	double b = 1.0/beta;
 	vDSP_vsdivD (A, 1, &b, B, 1, length);
 } 
 
- void realSingleVectorAdd(float* C, float* A, float* B, int length)
+/*!
+ add a single precision vector
+ */
+void realSingleVectorAdd(float* C, float* A, float* B, int length)
 {
 	vDSP_vadd (A, 1, B, 1, C, 1, length);
 }
 
- void realDoubleVectorAdd(double* C, double* A, double* B, int length)
+/*!
+ add a double precision vector
+ */
+void realDoubleVectorAdd(double* C, double* A, double* B, int length)
 {
 	vDSP_vaddD (A, 1, B, 1, C, 1, length);
 }
 
-// cbnote this was flipped
- void realSingleVectorSubtract(float* C, float* A, float* B, int length)
+/*!
+ subtract a single precision vector
+ */
+void realSingleVectorSubtract(float* C, float* A, float* B, int length)
 {
 	vDSP_vsub (B, 1, A, 1, C, 1, length);
 }
 
- void realDoubleVectorSubtract(double* C, double* A, double* B, int length)
+/*!
+ subtract a double precision vector
+ */
+void realDoubleVectorSubtract(double* C, double* A, double* B, int length)
 {
 	vDSP_vsubD (B, 1, A, 1, C, 1, length);
 }
 
- void realSingleSolve(float* kcopy, float* fcopy, int cdofs)
+/*!
+ solve A*x = B for single precision
+ */
+void realSingleSolve(float* kcopy, float* fcopy, int cdofs)
 {
 	integer w = 1;
 	integer ipiv[cdofs];
@@ -123,8 +146,10 @@
 //	printf("time to solve %d equations =  %lf ms\n", cdofs, time*1E3);
 }
 
-
- void realDoubleSolve(double* kcopy, double* fcopy, int cdofs)
+/*!
+ solve A*x = B for double precision
+ */
+void realDoubleSolve(double* kcopy, double* fcopy, int cdofs)
 {
 	integer w = 1;
 	integer ipiv[cdofs];
@@ -144,8 +169,10 @@
 
 #pragma mark -
 #pragma mark matrix
-
- void realSingleNormalizeMatrixRows(__CLPK_real* mat, int size	)
+/*!
+ normalize the rows of a matrix
+ */
+void realSingleNormalizeMatrixRows(__CLPK_real* mat, int size	)
 {	
 	int i,j;
 	for ( i=0; i<size; i++){
@@ -168,7 +195,10 @@
 	}
 }
 
- void realSingleNormalizeMatrixColumns(	__CLPK_real* mat, int size	)
+/*!
+ normalize the columns of a matrix
+ */
+void realSingleNormalizeMatrixColumns(	__CLPK_real* mat, int size	)
 {	
 	int i,j;
 	for ( i=0; i<size; i++){
@@ -191,7 +221,10 @@
 	}
 }
 
- void realSingleMatrixVectorMult(__CLPK_real* c, __CLPK_real* a, __CLPK_real* b, int size)
+/*!
+ multiply matrix a an b and put the result in c in single precision
+ */
+void realSingleMatrixVectorMult(__CLPK_real* c, __CLPK_real* a, __CLPK_real* b, int size)
 {
 	for (int i=0; i< size; i++){
 		c[i] = 0.0;
@@ -201,7 +234,10 @@
 	}
 }
 
- void realDoubleMatrixVectorMult(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal* b, int size)
+/*!
+ multiply matrix a an b and put the result in c in double precision
+ */
+void realDoubleMatrixVectorMult(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal* b, int size)
 {
 	for (int i=0; i< size; i++){
 		c[i] = 0.0;
@@ -211,7 +247,10 @@
 	}
 }
 
- void realSingleMatrixScale(__CLPK_real* c, __CLPK_real* a, __CLPK_real beta, int size)
+/*!
+ scale matrix a by scalar b and put the result in c in single precision
+ */
+void realSingleMatrixScale(__CLPK_real* c, __CLPK_real* a, __CLPK_real beta, int size)
 {
 //	printf("\nm_scale:\n");
 
@@ -224,7 +263,10 @@
 	}	
 }
 
- void realDoubleMatrixScale(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal beta, int size)
+/*!
+ scale matrix a by scalar b and put the result in c in double precision
+ */
+void realDoubleMatrixScale(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal beta, int size)
 {
 //	printf("\nm_scale:\n");
 
@@ -237,7 +279,10 @@
 	}	
 }
 
- void realSingleAdd2Matricies(float* c, float* a, float* b, int size) // square matrix
+/*!
+ add square matrix a to square matrix b and put the result in squre matrix c in single precision
+ */
+void realSingleAdd2Matricies(float* c, float* a, float* b, int size) // square matrix
 {	
 
 //	const vFloat* aa = (const vFloat*) a;
@@ -257,7 +302,10 @@
 	}
 }
 
- void realDoubleAdd2Matricies(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal* b, int size) // square matrix
+/*!
+ add square matrix a to square matrix b and put the result in squre matrix c in double precision
+ */
+void realDoubleAdd2Matricies(__CLPK_doublereal* c, __CLPK_doublereal* a, __CLPK_doublereal* b, int size) // square matrix
 {	
 
 //	const vFloat* aa = (const vFloat*) a;
@@ -278,8 +326,10 @@
 
 }
 
-
- void realSingleAdd3Matricies(float* d, float* a, float* b, float*c, int size	) // square matrix
+/*!
+ add three square matricies in single precision, put the result in matrix d
+ */
+void realSingleAdd3Matricies(float* d, float* a, float* b, float*c, int size	) // square matrix
 {	
 	float* temp = (float*) calloc(size*size, sizeof(float));
 	realSingleAdd2Matricies(temp,a,b,size);   
@@ -292,7 +342,10 @@
 	free(temp);
 }
 
- void realDoubleAdd3Matricies(double* d, double* a, double* b, double*c, int size	) // square matrix
+/*!
+ add three square matricies in double precision, put the result in matrix d
+ */
+void realDoubleAdd3Matricies(double* d, double* a, double* b, double*c, int size	) // square matrix
 {	
 	double* temp = (double*) calloc(size*size, sizeof(double));
 	realDoubleAdd2Matricies(temp,a,b,size);   
@@ -305,8 +358,10 @@
 	free(temp);
 }
 
-
- void realSingleSubtract2Matricies(float* c, float* a, float* b, int size) // square matrix
+/*!
+ subtract square matrix a from square matrix b and put the result in squre matrix c in single precision
+ */
+void realSingleSubtract2Matricies(float* c, float* a, float* b, int size) // square matrix
 {	
 //	const vFloat* aa = (const vFloat*) a;
 //	const vFloat* bb = (const vFloat*) b;
@@ -323,8 +378,10 @@
 	}
 }
 
-
- void realSingleOrthonormalizeMatrix(__CLPK_real* m, __CLPK_integer sizeM[])
+/*!
+ orthonormalize matrix m of size n x m stored in array sizeM in single precision
+ */
+void realSingleOrthonormalizeMatrix(__CLPK_real* m, __CLPK_integer sizeM[])
 {
 	__CLPK_integer info;
 	__CLPK_integer lwork = 32*sizeM[1];
@@ -355,7 +412,10 @@
 	free(work);
 }
 
- void realDoubleOrthonormalizeMatrix(__CLPK_doublereal* m, __CLPK_integer sizeM[])
+/*!
+ orthonormalize matrix m of size n x m stored in array sizeM in double precision
+ */
+void realDoubleOrthonormalizeMatrix(__CLPK_doublereal* m, __CLPK_integer sizeM[])
 {
 	__CLPK_integer info;
 	__CLPK_integer lwork = 32*sizeM[1];
@@ -388,8 +448,10 @@
 	free(work);
 }
 
-
- void realSingleMatrixOuOfPlaceTranspose(float* a, int size[], float* b)
+/*!
+ transpose matrix a of size n x m stored in array size and return it in matrix b, in single precision
+ */
+void realSingleMatrixOuOfPlaceTranspose(float* a, int size[], float* b)
 {
 	//vSgetmi inplace
 	//vSgetmo outof place
@@ -407,7 +469,10 @@
 	//vSgetmo( size[0], size[1], aa, bb); // if not a multiple of 4 it doesn't execute the scalar code
 }
 
- void realDoubleMatrixOutOfPlaceTranspose(double* a, int size[], double* b)
+/*!
+ transpose matrix a of size n x m stored in array size and return it in matrix b, in double precision
+ */
+void realDoubleMatrixOutOfPlaceTranspose(double* a, int size[], double* b)
 {
 	//vSgetmi inplace
 	//vSgetmo outof place
@@ -427,8 +492,10 @@
 	//vSgetmo( size[0], size[1], aa, bb); // if not a multiple of 4 it doesn't exect the scalar code
 }
 
-
- void realSingleMatrixCholesky(float* a, int size)
+/*!
+ compute the  Cholesky decomposition of matrix a of size n x m stored in array size and return it in place, in single precision
+ */
+void realSingleMatrixCholesky(float* a, int size)
 {
 	//http://www.netlib.org/clapack/single/spotrf.c
 	//int spotrf_(char *uplo, integer *n, real *a, integer *lda, integer *info)
@@ -437,8 +504,10 @@
 	spotrf_(&L, &s, a, &s,&info);
 }
 
-
- void realSingleMatrixInverse(float* a, int size)
+/*!
+ compute the  inverse of matrix a of size n x m stored in array size and return it in place, in single precision
+ */
+void realSingleMatrixInverse(float* a, int size)
 {
 	integer info;
 	integer s = size;
@@ -458,8 +527,10 @@
 	//}
 }
 
-
- void realDoubleMatrixInverse(double* a, int size)
+/*!
+ compute the  inverse of matrix a of size n x m stored in array size and return it in place, in double precision
+ */
+void realDoubleMatrixInverse(double* a, int size)
 {
 	integer info;
 	integer s = size;
@@ -484,8 +555,11 @@
 #pragma mark -
 #pragma mark matrix eigen
 
-
- void realSingleNonSymmetricEigenDecomp(float* wr, float* wi, float* vr, float*vl, float* mat, int sizeK)
+/*!
+ compute the eigen decomposition for a non-symmatric matrix in single precision
+ wr and wi are the eigenvalues, vr and vl are the eigenvectors for the square matrix mat of size sizek
+ */
+void realSingleNonSymmetricEigenDecomp(float* wr, float* wi, float* vr, float*vl, float* mat, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -513,7 +587,6 @@
 	}
 	printf("\nComputing eigenvectors and eigenvalues.\n");
 #endif
-
 
 	/* 	
 	 LAPACK libraries require that all arguments be passed as pointers. 
@@ -543,7 +616,6 @@
 		exit(1);
 	}
 	
-	
 	printf("\nEigenvalues:\n");
 	for ( indx = 0; indx < matSize; indx++)
 		printf("  % 5.4e+% 5.4ei \n", wr[indx], wi[indx] );
@@ -564,7 +636,12 @@
 	// Return success. 
 }
 
- void realSingleSymmetricGeneralEigenDecomp(float* wr, float* K, float* M, int sizeK)
+/*!
+ compute the eigen decomposition for a generalized symmetric-definite eigenproblem in single precision
+ wr are eigenvalues, on entry K is the stiffness matrix and on exit K contains the eigenvectors, the size of the matrix is K
+ on entry M is the mass matrix, on exit, it contains the cholesky decomposition of the mass matrix
+ */
+void realSingleSymmetricGeneralEigenDecomp(float* wr, float* K, float* M, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -581,7 +658,6 @@
 		printf(memString);
 		exit(1);
 	}
-	
 	
 #ifdef DEBUG_PRINT
 	int row, col;
@@ -607,8 +683,6 @@
 	ssygv_(&type, &V, &U, &matSize, K, &matSize, M, &matSize, wr, work, &lwork, &info);	 
 	
 	
-	
-
 #ifdef DEBUG_PRINT	
 	printf("n: %d, info: %d\n", matSize,info);
 	// Check the output flag. 
@@ -637,10 +711,13 @@
 
 	//Free up the memory we allocated. 
 	free(work);
-
 }
 
- void realSingleSymmetricEigenDecomp(float* wr, float* lkl, int sizeK)
+/*!
+ compute the eigen decomposition for a symmetric matrix in single precision
+ wr are eigenvalues, on entry lkl is the stiffness matrix and on exit lkl contains the eigenvectors, the size of the matrix is sizeK
+ */
+void realSingleSymmetricEigenDecomp(float* wr, float* lkl, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -692,7 +769,6 @@
 
 	//}
 
-
 	// come back sorted
 	
 #ifdef DEBUG_PRINT	
@@ -727,8 +803,11 @@
 
 }
 
-
- void realDoubleNonSymmetricEigenDecomp(double* wr, double* wi, double* vr, double*vl, double* mat, int sizeK)
+/*!
+ compute the eigen decomposition for a non-symmatric matrix in double precision
+ wr and wi are the eigenvalues, vr and vl are the eigenvectors for the square matrix mat of size sizek
+ */
+void realDoubleNonSymmetricEigenDecomp(double* wr, double* wi, double* vr, double*vl, double* mat, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -807,7 +886,13 @@
 	// Return success. 
 }
 
- void realDoubleSymmetricGeneralEigenDecomp(double* wr, double* K, double* M, int sizeK)
+
+/*!
+ compute the eigen decomposition for a generalized symmetric-definite eigenproblem in double precision
+ wr are eigenvalues, on entry K is the stiffness matrix and on exit K contains the eigenvectors, the size of the matrix is K
+ on entry M is the mass matrix, on exit, it contains the cholesky decomposition of the mass matrix
+ */
+void realDoubleSymmetricGeneralEigenDecomp(double* wr, double* K, double* M, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -909,7 +994,10 @@
 
 }
 
- void realDoubleSymmetricGeneralEigenDecompComputeN(double* wr, double* K, double* M, int sizeK, int* range)
+/*!
+ same as above but instead computes a specified number of values and vectors
+ */
+void realDoubleSymmetricGeneralEigenDecompComputeN(double* wr, double* K, double* M, int sizeK, int* range)
 {
 	integer matSize = (integer) sizeK;
 
@@ -1026,7 +1114,11 @@
 	free(ifail);
 }
 
- void realDoubleSymmetricEigenDecomp(double* wr, double* lkl, int sizeK)
+/*!
+ compute the eigen decomposition for a symmetric matrix in double precision
+ wr are eigenvalues, on entry lkl is the stiffness matrix and on exit lkl contains the eigenvectors, the size of the matrix is sizeK
+ */
+void realDoubleSymmetricEigenDecomp(double* wr, double* lkl, int sizeK)
 {
 	integer matSize = (integer) sizeK;
 
@@ -1057,7 +1149,6 @@
 	printf("\nComputing eigenvectors and eigenvalues.\n");
 #endif
 
-
 	//if (num == sizeK){
 		/* 	
 		 LAPACK libraries require that all arguments be passed as pointers. 
@@ -1078,7 +1169,6 @@
 
 	//}
 
-
 	// come back sorted
 	
 #ifdef DEBUG_PRINT	
@@ -1089,7 +1179,6 @@
 		printf("\nFailed to compute: %d\n", info);
 		exit(1);
 	}
-	
 	
 	printf("\nEigenvalues:\n");
 	for (int indx = 0; indx < matSize; indx++)
@@ -1114,8 +1203,11 @@
 }
 
 #pragma mark ___Accummulate___
-//kb = kb + kinmtsb'*matmtsb*kinmtsb*wtx*wty*detjacob
 
+/*!
+ compute the accumulation operation c =  a^T b a
+//kb = kb + kinmtsb'*matmtsb*kinmtsb*wtx*wty*detjacob
+*/
 inline void	accumulate(			double* c, int size,	// cbnote only for square matrix??
 								double* a, int sizea[], 
 								double* b, int sizeb,
@@ -1177,7 +1269,9 @@ inline void	accumulate(			double* c, int size,	// cbnote only for square matrix?
 	free(temp);
 }
 
-
+/*!
+ test that V^T K V produces a diagonal matrix
+ */
 void testDiagonalizes(double* V, int sizeV[], double* K, int dofs)
 {
 	// check V^T K V is a diagonal matrix
@@ -1202,9 +1296,7 @@ void testDiagonalizes(double* V, int sizeV[], double* K, int dofs)
 	}
 	printf("];\n");
 //#endif
-																					
-
-			
+																								
 	free(temp);
 }
 

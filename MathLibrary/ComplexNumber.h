@@ -2,6 +2,7 @@
 //	ComplexNumber.h
 //
 //		a useful complex number class
+//          from http://developer.apple.com/library/mac/#samplecode/AUPinkNoise/Listings/Utility_ComplexNumber_h.html
 //
 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,8 +1,6 @@
 #ifndef _MatrixOps_H_
 #define _MatrixOps_H_
 
-// cbnote rename to small matrix ops
-
 #pragma mark -
 #pragma mark Double
 #pragma mark ___2Vector___

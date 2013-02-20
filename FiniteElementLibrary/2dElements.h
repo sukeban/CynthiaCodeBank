@@ -20,6 +20,9 @@
 
 #pragma mark _Quads___
 
+/*!
+ compute the area of a quadrilateral from the list of coordinates
+ */
 inline double quadArea(double* coords) //assuming all same z ccords
 {
 	double p[3];
@@ -44,6 +47,9 @@ inline double quadArea(double* coords) //assuming all same z ccords
 	return area;
 }
 
+/*!
+ compute the center of a quadrilateral from the list of coordinates and return them in x and y
+ */
 inline void getQuadCenter(double* coords, double &x, double &y)
 {
 	double x1,x2,x3,x4, y1,y2,y3,y4;
@@ -56,6 +62,9 @@ inline void getQuadCenter(double* coords, double &x, double &y)
     y=(y1+y2+y3+y4)/4;                      // y-centroid of triangle
 }
 
+/*!
+ compute the lumped mass matrix (http://en.wikipedia.org/wiki/Mass_matrix) from a quadrilateral given the coordinates and the material info 
+ */
 void	quadElasticLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 {
 	double area = quadArea(coords);
@@ -65,6 +74,9 @@ void	quadElasticLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 		M[i+i*8] += mass;
 }
 
+/*!
+ compute the consistent mass matrix (http://www.softeng.rl.ac.uk/st/projects/felib4/Docs/html/Intro/intro-node55.html) from a quadrilateral given the coordinates and the material info
+ */
 void	quadElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo minfo)
 {
 	double area = quadArea(coords);
@@ -90,7 +102,9 @@ void	quadElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo min
 }
 
 #pragma mark ___Tri___
-
+/*!
+ compute the area of a triangle from the list of coordinates
+ */
 inline double triArea(double* coords) //assuming all same z ccords
 {
 	double x1,x2,x3,y1,y2,y3,area;
@@ -108,6 +122,9 @@ inline double triArea(double* coords) //assuming all same z ccords
 	return dabs(area);
 }
 
+/*!
+ compute the center of a triangle from the list of coordinates and return them in x and y
+ */
 inline void getTriCenter(double* coords, double &x, double &y)
 {
 	double x1,x2,x3,y1,y2,y3;
@@ -119,10 +136,10 @@ inline void getTriCenter(double* coords, double &x, double &y)
     y=(y1+y2+y3)/3.0;                      // y-centroid of triangle
 }
 
-
-
 #pragma mark ___General___
-
+/*!
+ compute the Jacobian matrix for a 2d isoparametric element
+ */
 inline void twoDJacobian(int numnodes, double* J, double* invJ, double &detJ, double* dNdSdN, double* x)
  {
 	int i;
@@ -155,7 +172,9 @@ inline void twoDJacobian(int numnodes, double* J, double* invJ, double &detJ, do
 #endif
  }
  
-
+/*!
+ compute the global derivitive matrix for a 2d isoparametric element
+ */
 inline void twoDPhysicalDerivs(int numnodes, double* dNdXdY, double* invJ, double* dNdSdN)
 {	
 	int i;
@@ -178,9 +197,10 @@ inline void twoDPhysicalDerivs(int numnodes, double* dNdXdY, double* invJ, doubl
 
 }
 
-
-// pp.329 fea in matlab book kwon
-inline void	twoDConstMatrix(int numnodes, double* B, double* dNdXdY)
+/*!
+  compute the kinematic equation for a 2d isoparametric element
+ */
+/inline void	twoDConstMatrix(int numnodes, double* B, double* dNdXdY)
 {	
 	int sizeB1 = 3;
 	int dim = 2;
@@ -207,6 +227,10 @@ inline void	twoDConstMatrix(int numnodes, double* B, double* dNdXdY)
 }
 
 #pragma mark ___AxisSym___
+
+/*!
+ compute the kinematic equation for an even axis-symmetric radial element
+ */
 void	axisSymConstMatrix(int numnodes, double* B, double* dNdRdZ, double* N, double r, double theta, int n)
 {
 	int sizeB1 = 6;
@@ -252,6 +276,9 @@ void	axisSymConstMatrix(int numnodes, double* B, double* dNdRdZ, double* N, doub
 #endif			
 }
 
+/*!
+ compute the kinematic equation for an odd axis-symmetric radial element
+ */
 void	antiAxisSymConstMatrix(int numnodes, double* B, double* dNdRdZ, double* N, double r, double theta, int n)
 {
 	int sizeB1 = 6;

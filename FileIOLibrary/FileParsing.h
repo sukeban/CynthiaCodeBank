@@ -21,11 +21,10 @@
 
 #include <algorithm>
 
-// 
-// Global helper functions
-//
-// wrapper around fgets to throw out comment lines (lines starting with #)
-// and possibly in the future check for other special lines in data files 
+/*!
+ wrapper around fgets to throw out comment lines (lines starting with #)
+ and possibly in the future check for other special lines in data files 
+*/
 char *myfgets(char *s, int n, FILE *stream)
 {
     char *t;                     // return string
@@ -49,6 +48,9 @@ char *myfgets(char *s, int n, FILE *stream)
 
 #pragma mark ___SMF___
 
+/*!
+    opens a SMF (http://gicl.cs.drexel.edu/wiki/SMF) file and returns the number of nodes, faces and verticies per element
+ */
 int  ReadSMFNumbers(char* filename, int &num_nodes, int &num_faces, int &verts_per_face) 
 {	
 	FILE *file;
@@ -102,7 +104,9 @@ int  ReadSMFNumbers(char* filename, int &num_nodes, int &num_faces, int &verts_p
 	return 1;
 }
 
-
+/*!
+ opens a SMF (http://gicl.cs.drexel.edu/wiki/SMF) file and puts the data in an pre-allocated GeomData object
+ */
 int ReadSMFData(char* filename, GeomData* data)
 {
 	FILE *file;
@@ -220,6 +224,10 @@ close:
 
 
 #pragma mark ___Amira___
+
+/*!
+ opens an AMIRA (http://www.mpi-inf.mpg.de/~weinkauf/notes/amiramesh.html)file and returns the number of nodes and number of tetrahedra in the file
+ */
 int  ReadAmiraNumbers(char* filename, int &num_nodes, int &num_tetras)
 {	
 	FILE *file;
@@ -242,7 +250,9 @@ int  ReadAmiraNumbers(char* filename, int &num_nodes, int &num_tetras)
 	return 1;
 }
 
-// Amira format, .inp
+/*!
+ opens an AMIRA (http://gicl.cs.drexel.edu/wiki/SMF) file and puts the data in an pre-allocated GeomData object
+ */
 int ReadAmiraData(char* filename, GeomData* data)
 {
 	FILE *file;
@@ -372,6 +382,9 @@ int ReadAmiraData(char* filename, GeomData* data)
 
 
 #pragma mark ___Mesh___
+/*!
+ opens a MESH (http://wordwood.merseine.us/TitanQuest-MeshFileFormat/) file and returns the number of nodes, faces and tetrahedra
+ */
 int  ReadMeshNumbers(char* filename, int &num_nodes, int &num_faces, int &num_tetras)
 {	
 	FILE *file;
@@ -424,7 +437,9 @@ int  ReadMeshNumbers(char* filename, int &num_nodes, int &num_faces, int &num_te
 	return 1;
 }
       
-
+/*!
+ opens a MESH (http://wordwood.merseine.us/TitanQuest-MeshFileFormat/) file and puts the data in a pre-allocated GeomData object
+ */
 int ReadMeshData(char* filename, GeomData* data)
 {
 	FILE *file;

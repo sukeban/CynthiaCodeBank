@@ -28,9 +28,12 @@
 
 #pragma mark ____SingleToComplex____
 
-inline void realComplexMakeSingleVector(	__CLPK_real* vecOut, 
-									__CLPK_complex* vecIn, 
-									int size		)
+/*!
+ convert a square complex matrix of size into a real matrix
+ */
+inline void realComplexMakeSingleVector(__CLPK_real* vecOut,
+                                        __CLPK_complex* vecIn, 
+                                        int size		)
 {	int i;						
 	for ( i=0; i<size; i++){		
 		vecOut[i] = vecIn[i].r;
@@ -41,6 +44,9 @@ inline void realComplexMakeSingleVector(	__CLPK_real* vecOut,
 
 #pragma mark ___SingleOps___
 
+/*!
+ return the complex conjugate of a complex number
+ */
 inline __CLPK_complex	complexSingleGetConjugate(__CLPK_complex number) 
 {
 	__CLPK_complex result;
@@ -49,16 +55,25 @@ inline __CLPK_complex	complexSingleGetConjugate(__CLPK_complex number)
 	return result;
 }
 
+/*!
+ return the phase of a complex number
+ */
 inline double	complexSingleGetPhase(__CLPK_complex number) 
 {
 	return atan2(number.i, number.r);
 }
 
-inline double	complexSingleGetMagnitude(__CLPK_complex number) 
+/*!
+ return the magnitude of a complex number
+ */
+inline double	complexSingleGetMagnitude(__CLPK_complex number)
 {
 	return sqrtf(pow(number.i,2) + pow(number.r,2));
 }
 
+/*!
+ return the a complex number raised to a power
+ */
 inline __CLPK_complex complexSinglePow(__CLPK_complex number, float power)
 {
 #ifdef DEBUG_PRINT
@@ -74,6 +89,9 @@ inline __CLPK_complex complexSinglePow(__CLPK_complex number, float power)
 	return result;	
 }
 
+/*!
+ add three square complex matricies and return the result in d
+ */
 inline void complexSingleAdd3Matricies(	__CLPK_complex* d, 
 										__CLPK_complex* a, __CLPK_complex* b, __CLPK_complex* c, 
 										int size)
@@ -94,6 +112,9 @@ inline void complexSingleAdd3Matricies(	__CLPK_complex* d,
 	return;
 }
 
+/*!
+ multiply a complex matrix by a complex number and return it in another matrix
+ */
 inline void complexSingleMultMatrix(__CLPK_complex* matOut, __CLPK_complex scale, __CLPK_complex* matIn, int size)
 {
 	int i,j;
@@ -124,6 +145,9 @@ inline void complexSingleMultMatrix(__CLPK_complex* matOut, __CLPK_complex scale
 */	
 }
 
+/*!
+ normalize the columns of a square complex matrix in place
+ */
 inline void complexSingleNormalizeMatrixColumns(__CLPK_complex* mat, int size)
 {	int i,j;
 	for ( i=0; i<size; i++){
@@ -146,7 +170,9 @@ inline void complexSingleNormalizeMatrixColumns(__CLPK_complex* mat, int size)
 	}
 }
 
-
+/*!
+ out of place reorder the contents of a matrix from column major to row major format
+ */
 inline void complexSingleMakeRowMajor(__CLPK_complex* matOut, __CLPK_complex* matIn, int size)
 {	
 	int i,j;
@@ -158,7 +184,9 @@ inline void complexSingleMakeRowMajor(__CLPK_complex* matOut, __CLPK_complex* ma
 }
 
 #pragma mark ___Eigen___
-
+/*!
+ perform an eigendecomposition of a complex matrix
+ */
 inline void complexSingleGeneralEigenDecompose(__CLPK_complex* wr, 
 												__CLPK_complex* vr, __CLPK_complex*vl, 
 												__CLPK_complex* mat, int size)
@@ -198,9 +226,6 @@ inline void complexSingleGeneralEigenDecompose(__CLPK_complex* wr,
 					&matSize,  wr,  
 					vl,  &matSize, vr, &matSize, 
 					work, &lwork, work2, &info);
-					
-
-
 
 #ifdef DEBUG_PRINT
 	time = currentTime() - time;
@@ -234,7 +259,10 @@ inline void complexSingleGeneralEigenDecompose(__CLPK_complex* wr,
 	/* Return success. */
 }
 
-
+/*!
+ computes all eigenvalues and, optionally, eigenvectors of a
+    complex Hermitian matrix mat
+ */
 inline void complexSingleHermetianEigenDecompose(	__CLPK_real* wr, 
 													__CLPK_complex* vr, 
 													__CLPK_complex* mat, int size)
@@ -264,7 +292,6 @@ inline void complexSingleHermetianEigenDecompose(	__CLPK_real* wr,
 #ifdef DEBUG_PRINT 
 	double time = currentTime();
 #endif	
-
 
 // Subroutine  int cheev_(char *jobz, char *uplo, __CLPK_integer *n, __CLPK_complex *a, 
 //	__CLPK_integer *lda, __CLPK_real *w, __CLPK_complex *work, __CLPK_integer *lwork, __CLPK_real *rwork, 
@@ -342,7 +369,6 @@ inline __CLPK_doublecomplex complexDoublePow(__CLPK_doublecomplex number, float 
 	return result;	
 }
 
-
 inline void complexDoubleAdd3Matricies(	__CLPK_doublecomplex* d, 
 										__CLPK_doublecomplex* a, __CLPK_doublecomplex* b, __CLPK_doublecomplex* c, 
 										int size)
@@ -407,7 +433,6 @@ inline void complexDoubleNormalizeMatrixColumns(__CLPK_doublecomplex* mat, int s
 	}
 }
 
-
 #pragma mark ___Eigen___
 
 inline void complexDoubleGeneralEigenDecompose(	__CLPK_doublecomplex* wr, __CLPK_doublecomplex* vr, __CLPK_doublecomplex*vl, 
@@ -441,7 +466,6 @@ inline void complexDoubleGeneralEigenDecompose(	__CLPK_doublecomplex* wr, __CLPK
 				&matSize,  wr,  
 				vl,  &matSize, vr, &matSize, 
 				work, &lwork, work2, &info);
-
 
 	
 #ifdef DEBUG_PRINT
