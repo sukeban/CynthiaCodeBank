@@ -10,7 +10,9 @@
 #include "GeneralFE.h"
 #include "2dElements.h"
 
-
+/*!
+ compute the lumped mass matrix for a triangular plate element
+ */
 void	triPlateLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 {
 	double area = triArea(coords);
@@ -20,8 +22,9 @@ void	triPlateLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 		M[i+i*9] += mass; 
 }
 
-
-
+/*
+ compute the guass points for a triangular plate element
+ */
 void getPlateGaussPoints(double* gp, double* w, int num)
 {
 	gp[0] = 1./3.; gp[4] = 1./3.;
@@ -36,6 +39,9 @@ void getPlateGaussPoints(double* gp, double* w, int num)
 	w[3] = 25./96.;
 }
 
+/*
+ compute the material matrix a triangular plate element
+ */
 void plateMaterialMatrix(double* D,  PlateInfo constants)
 {
 	double frac = pow(constants.thickness,3.0)/12.0;
@@ -47,7 +53,9 @@ void plateMaterialMatrix(double* D,  PlateInfo constants)
 //			printf("D[%d][%d]: %lf\n", i, j, D[i+j*3]);
 }
 
-
+/*
+ compute the stiffness matrix for a triangular plate element
+ */
 void	triPlateStiffnessMatrix(		double*			K,
 										double*			coords,
 										AnalysisInfo	info,
@@ -56,9 +64,7 @@ void	triPlateStiffnessMatrix(		double*			K,
 	MaterialInfo	minfo = info.materialinfo;
 	GeomInfo		ginfo = info.geominfo;
 	IntegrationInfo iinfo = info.intinfo;
-	
-
-	
+		
 	int sizeK = ginfo.numelnodes*ginfo.nodedofs;
 
 	iinfo.numgauss = 4;
@@ -109,7 +115,6 @@ void	triPlateStiffnessMatrix(		double*			K,
 		x = (1. - gp[i] - gp[i+4])*x1 + gp[i]*x2 + gp[i+4]*x3;
 		y = (1. - gp[i] - gp[i+4])*y1 + gp[i]*y2 + gp[i+4]*y3;
 		
-		
 		A1 = 1./(2.*A)* (f1 + x*b1 + y*c1);
 		A2 = 1./(2.*A)* (f2 + x*b2 + y*c2);
 		A3 = 1./(2.*A)* (f3 + x*b3 + y*c3);
@@ -157,7 +162,9 @@ void	triPlateStiffnessMatrix(		double*			K,
 }
 
 
-
+/*
+ compute the stiffness and mass matricies for an object made of triangular plate elements
+ */
 void assembleTriPlateMatricies(		double* K, double* M, 
 									double* verts, int* inds, 
 									AnalysisInfo info,

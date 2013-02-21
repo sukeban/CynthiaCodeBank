@@ -24,6 +24,9 @@
 #include "CLPKRealMatrixOpsCM.h"
 
 #pragma mark ___ConstMatrix___
+/*!
+ compute the shell bending stress matrix from the shape function partial matrix
+ */
 inline void shellConstBending(double* Bbend, double* dNdXdY)
 {
 	int cr = 3;
@@ -48,6 +51,9 @@ inline void shellConstBending(double* Bbend, double* dNdXdY)
 #endif	
 }
 
+/*!
+ compute the shell membrane stress matrix from the shape function partial matrix
+ */
 inline void shellConstMembrane(double* Bmemb, double* dNdXdY)
 {
 	int cr = 3;
@@ -72,6 +78,9 @@ inline void shellConstMembrane(double* Bmemb, double* dNdXdY)
 #endif
 }
 
+/*!
+ compute the shell shear stress matrix from the shape function partial matrix
+ */
 inline void shellConstShear(double* Bshear, double* N, double* dNdXdY)
 {
 	int cr=2;
@@ -96,7 +105,9 @@ inline void shellConstShear(double* Bshear, double* N, double* dNdXdY)
 
 
 #pragma mark ___Transform___
-
+/*!
+ compute the shell direction cosines which translates local to global coordinates
+ */
 inline void computeDirectionCosines(double* transformMatrix, double* prime, double* coords, GeomInfo ginfo)
 {
 	//  compute direction cosines
@@ -199,6 +210,9 @@ inline void computeDirectionCosines(double* transformMatrix, double* prime, doub
 #endif	
 }
 
+/*!
+ perform the actual transformations
+ */
 inline void  transformToGlobal(double* Kout, double* K, double* T, int size) 
 {
 	double* temp = (double*) calloc(size*size, sizeof(double));		
@@ -256,7 +270,9 @@ inline void  transformToGlobal(double* Kout, double* K, double* T, int size)
 }
 
 #pragma mark ___OneElement___
-
+/*!
+ compute the shell stiffness matrix
+ */
 inline void	shellStiffnessMatrix( double* K,
 									 double* coords, 
 									 AnalysisInfo info, 
@@ -308,7 +324,6 @@ inline void	shellStiffnessMatrix( double* K,
 		for ( j=0; j<3; j++)
 			printf("Dbend[%ld][%ld]: %lf\n", i, j,Dbend[j*3 + i]);
 #endif			
-	
 		
 	double* Bbend = (double*) calloc(3*edof,sizeof(double));
 	double* Bmem = (double*) calloc(3*edof,sizeof(double));
@@ -436,6 +451,9 @@ inline void	shellStiffnessMatrix( double* K,
 	free(Kb), free(Km), free(Ks), free(Kt);
 }
 
+/*!
+ compute the shell lumped mass matrix
+ */
 inline void	shellLumpedMassMatrix(double* M, double* coords, AnalysisInfo info, ShellInfo sinfo)
 {
 	GeomInfo ginfo = info.geominfo;
@@ -454,6 +472,9 @@ inline void	shellLumpedMassMatrix(double* M, double* coords, AnalysisInfo info, 
 
 #pragma mark ___ManyElement___
 
+/*!
+ compute the stiffness and mass matricies for an object made of shell elements
+ */
 inline void assembleShellMatricies(	double* K, double* M, 
 								double* verts, int* inds, 
 								AnalysisInfo info, ShellInfo sinfo)
@@ -501,6 +522,10 @@ inline void assembleShellMatricies(	double* K, double* M,
 	free(coords);
 }
 
+
+/*!
+ check drilling degree of freedom
+ */
 inline void	checkDrilling(double* K, int size)
 {	
 	int i,j;

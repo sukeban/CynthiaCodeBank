@@ -162,7 +162,6 @@ int ReadSMFData(char* filename, GeomData* data)
 	data->reset();
 	data->radius = std::max(data->max[0] - data->min[0], data->max[1] - data->min[1]);
 	data->radius = std::max(data->max[2] - data->min[2], data->radius);
-		
 	
 #ifdef DEBUG_PRINT
 	printf("data min: %lf %lf %lf max: %lf %lf %lf\n", 
@@ -220,8 +219,6 @@ close:
 	return 1;
 
 }
-
-
 
 #pragma mark ___Amira___
 
@@ -380,7 +377,6 @@ int ReadAmiraData(char* filename, GeomData* data)
 
 }
 
-
 #pragma mark ___Mesh___
 /*!
  opens a MESH (http://wordwood.merseine.us/TitanQuest-MeshFileFormat/) file and returns the number of nodes, faces and tetrahedra
@@ -515,7 +511,6 @@ int ReadMeshData(char* filename, GeomData* data)
 	data->max[0], data->max[1], data->max[2]);
 #endif	
 
-
 	if (data->numfaces){
 
 		myfgets(s, MAXLINE, file); // then skip a line
@@ -559,7 +554,6 @@ int ReadMeshData(char* filename, GeomData* data)
 		printf("];\n");
 	#endif	
 	}
-
 
 	if (data->numtetras){
 	

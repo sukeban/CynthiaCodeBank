@@ -17,6 +17,12 @@
 #include "GeneralFE.h"
 #include "3dElements.h"
 
+/*!
+ compute the shape functions for a tetrehedral element given a set of coordinates
+ return them in N
+ 
+ x,y,z are unused at the moment
+ */
 void makeN(double* N, double* coords, double x, double y, double z)
 {
 	double x1=coords[0+0]; double y1=coords[0+4]; double z1=coords[0+8];
@@ -83,6 +89,9 @@ void makeN(double* N, double* coords, double x, double y, double z)
 #endif
 }
 
+/*!
+ compute the matrix B which satifies the equation K = B^T D B
+ */
 void makeB(double* B, double* coords)
 {
 	double x1=coords[0+0]; double y1=coords[0+4]; double z1=coords[0+8];
@@ -141,6 +150,9 @@ void makeB(double* B, double* coords)
 
 }
 
+/*!
+ compute the stiffness matrix of a tetrahedral element
+ */
 void tetraElasticStiffnessMatrix(	double* K,
 									double* coords,
 									AnalysisInfo info)
@@ -164,7 +176,6 @@ void tetraElasticStiffnessMatrix(	double* K,
 	sizeB[1] = 12;
 	
 	double V = tetraVolume(coords);
-
 	
 	int sizeK = 12;
 	accumulate(			K, sizeK, 
@@ -188,8 +199,13 @@ void tetraElasticStiffnessMatrix(	double* K,
 	free(BT);
 }
 
+/*!
+ 
+ compute the consistent stiffness matrix of a tetrahedral ekement
+ 
 //http://icl.cs.utk.edu/lapack-forum/viewtopic.php?p=769&sid=51047c7c05a5be0be278c20cc118eecf
 // page 362 rao
+ */
 void	tetraElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo minfo)
 {
 	double V = tetraVolume(coords);
@@ -224,7 +240,6 @@ void	tetraElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo mi
 		}	
 	}
 
-
 #ifdef DEBUG_PRINT
 	printf("\n\n\n");
 	for ( i=0; i<sizeM; i++){
@@ -237,6 +252,9 @@ void	tetraElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo mi
 
 }
 
+/*!
+ compute the lumped mass matrix for a tetrahedral element
+*/
 void	tetraElasticLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 {
 	double vol = tetraVolume(coords);
@@ -260,6 +278,9 @@ void	tetraElasticLumpedMassMatrix(double* M, double* coords, MaterialInfo minfo)
 #endif
 }
 
+/*!
+ assemble the stiffness and mass matricies for an object made of tetrahedral elements
+ */
 void assembleTetraElasticMatricies(	double* K, double* M, 
 									double* verts, int* inds, 
 									AnalysisInfo info)

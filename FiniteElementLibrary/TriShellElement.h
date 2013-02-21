@@ -26,7 +26,9 @@
 #include "CLPKRealMatrixOpsCM.h"
 
 #pragma mark ___ConstMatrix___
-#pragma mark ___ConstMatrix___
+/*!
+ compute the bending stress for a triangular shell element
+ */
 inline void shellConstBending(double* Bbend, double* dNdXdY)
 {
 	int cr = 3;
@@ -50,6 +52,10 @@ inline void shellConstBending(double* Bbend, double* dNdXdY)
 	}
 #endif	
 }
+
+/*!
+ compute the memrbrane stress for a triangular shell element
+ */
 inline void shellConstMembrane(double* Bmemb, double* dNdXdY)
 {
 	int cr = 3;
@@ -74,6 +80,9 @@ inline void shellConstMembrane(double* Bmemb, double* dNdXdY)
 #endif
 }
 
+/*!
+ compute the shear stress for a triangular shell element
+ */
 inline void shellConstShear(double* Bshear, double* N, double* dNdXdY)
 {
 	int cr=2;
@@ -96,9 +105,10 @@ inline void shellConstShear(double* Bshear, double* N, double* dNdXdY)
 }
 
 
-
 #pragma mark ___Transform___
-
+/*!
+ compute the shell direction cosines which translates local to global coordinates
+ */
 inline void computeDirectionCosines(double* transformMatrix, double* prime, double* coords, GeomInfo ginfo)
 {
 	//  compute direction cosines
@@ -182,7 +192,10 @@ inline void computeDirectionCosines(double* transformMatrix, double* prime, doub
 #endif	
 }
 
-inline void  transformToGlobal(double* Kout, double* K, double* T, int size) 
+/*!
+ perform the actual transformations
+ */
+inline void  transformToGlobal(double* Kout, double* K, double* T, int size)
 {
 	double* temp = (double*) calloc(size*size, sizeof(double));		
 	
@@ -239,7 +252,9 @@ inline void  transformToGlobal(double* Kout, double* K, double* T, int size)
 }
 
 #pragma mark ___OneElement___
-
+/*!
+ compute the stiffness matrix for a triangular shell element
+ */
 inline void	shellStiffnessMatrix(	double* K,
 									 double* coords, 
 									 AnalysisInfo info, 
@@ -419,6 +434,9 @@ inline void	shellStiffnessMatrix(	double* K,
 	free(Kb), free(Km), free(Ks), free(Kt);
 }
 
+/*!
+ compute lumped mass matrix for a triangular shell element
+ */
 inline void	shellLumpedMassMatrix(double* M, double* coords, AnalysisInfo info, ShellInfo sinfo)
 {
 	GeomInfo ginfo = info.geominfo;
@@ -436,7 +454,9 @@ inline void	shellLumpedMassMatrix(double* M, double* coords, AnalysisInfo info, 
 }
 
 #pragma mark ___ManyElement___
-
+/*!
+ compute the stiffness and mass matrix for an object made of triangular shell elements
+ */
 inline void assembleShellMatricies(	double* K, double* M, 
 								double* verts, int* inds, 
 								AnalysisInfo info, ShellInfo sinfo)
@@ -484,6 +504,9 @@ inline void assembleShellMatricies(	double* K, double* M,
 	free(coords);
 }
 
+/*!
+ check the drilling degree of freedom
+ */
 inline void	checkDrilling(double* K, int size)
 {	
 	int i,j;
