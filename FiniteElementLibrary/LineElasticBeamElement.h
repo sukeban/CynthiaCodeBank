@@ -19,8 +19,9 @@
 #include "SharedFEData.h"
 #include "GeneralFE.h"
 
-
-
+/*!
+ compute the stiffness matrix for a linear elastic beam element
+*/
 void	lineBeamElasticStiffnessMatrix(	double* K,
 										double* coords, 
 										AnalysisInfo info, 
@@ -61,12 +62,12 @@ void	lineBeamElasticStiffnessMatrix(	double* K,
 	K[32] = 2*E*I/L;	
 	K[34] = -6*E*I/L2;
 	K[35] = 4*E*I/L;
-	
-	// cbnote detJ??
-	
 
 }
 
+/*!
+ compute the consistent mass matrix for a linear elastic beam element
+ */
 void	lineBeamElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo minfo, BeamInfo binfo)
 {
 	double mass = minfo.density*binfo.crossSectionalArea;
@@ -103,9 +104,11 @@ void	lineBeamElasticConsistentMassMatrix(double* M, double* coords, MaterialInfo
 	for (int i=0; i<36; i++)
 		M[i] *= (mass*L/420.0);
 	
-	// cbnote detJ ?
 }
 
+/*!
+ compute the mass and stiffness matricies for a linear elastic beam elmement
+ */
 void assembleLineBeamElasticMatricies(	double* K, double* M, 
 										double* verts, int* inds, 
 										AnalysisInfo info,

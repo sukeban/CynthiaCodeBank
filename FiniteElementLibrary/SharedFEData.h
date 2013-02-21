@@ -12,7 +12,9 @@
 #include <mach/mach.h>
 #include <mach/mach_time.h>
 
-
+/*!
+ constans used in CBLAS
+ */
 char	L		= 'L';
 char	N		= 'N';
 char	V		= 'V';
@@ -22,7 +24,9 @@ char	I		= 'I';
 char	U		= 'U';
 char	S		= 'S';
 
-/// Structure for Stress State 
+/*!
+ Structure for Stress State
+ */
 enum StressEnum{
 	planestress,
 	planestrain,
@@ -31,7 +35,9 @@ enum StressEnum{
 	acoustic
 };
 
-/// Structure for Material Properties 
+/*!
+ Structure for Material Properties
+ */
 struct MaterialInfo {
 	double		elasticModulus;
 	double		poisson;
@@ -44,7 +50,9 @@ struct PlateInfo{
 	double thickness;
 };
 
-/// Structure for Shell Properties 
+/*!
+ Structure for Shell Properties
+ */
 struct ShellInfo{
 	double	thickness;
 	int		numgauss_s;
@@ -55,7 +63,9 @@ struct BeamInfo{
 	double momentOfInertia;
 };
  
-/// Structure for Geometry Properties 
+/*!
+ Structure for Geometry Properties
+ */
 struct GeomInfo{
 	int dimension;		// dimension of the space	
 	
@@ -68,7 +78,9 @@ struct GeomInfo{
 	double scale;
 };
 
-/// Structure for Fluid-Object Coupling 
+/*!
+ Structure for Fluid-Object Coupling
+ */
 struct CoupleInfo{
 	
 	int numbeamverts;		// total number of beam nodes
@@ -77,28 +89,35 @@ struct CoupleInfo{
 	GeomInfo geominfo;
 };
 
-/// Enumeration for the Approximating Polynomial Type
+/*!
+ Enumeration for the Approximating Polynomial Type
+ */
 enum PolynomialOrderEnum {
 	linear, 
 	quadratic, 
 	cubic
 };
  
-/// Structure conatining the Approximating Polynomial order and the type of Integration used for the Mass Matrix
+/*!
+ Structure conatining the Approximating Polynomial order and the type of Integration used for the Mass Matrix
+ */
 struct IntegrationInfo{
 	PolynomialOrderEnum order;
 	int				    numgauss;
 	bool				lumpedmass;
 };
 
-
-/// Structure with Constraint Information
+/*!
+ Structure with Constraint Information
+ */
 struct ConstraintInfo{
 	int*				constraints;	// the constrained degrees of freedom
 	int					numconstraints; // how many constrained degrees of freedom
 };
 
-/// Structure with all of the Analysis Information
+/*!
+ Structure with all of the Analysis Information
+ */
 struct AnalysisInfo{
 	GeomInfo			geominfo;
 	MaterialInfo		materialinfo;
@@ -107,9 +126,11 @@ struct AnalysisInfo{
 };
 
 
-/// Returns the current time in seconds
 #pragma mark ___Misc___
-static __inline__ double 
+/*! 
+ Returns the current time in seconds
+*/
+static __inline__ double
 currentTime(void)
 {
     static double scale = 0.0;

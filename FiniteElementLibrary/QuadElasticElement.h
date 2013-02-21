@@ -18,7 +18,9 @@
 
 #include "2dElements.h"
 
-
+/*!
+ compute the stiffness matrix for a quadrilateral elastic element
+ */
 void	quadElasticStiffnessMatrix(		double* K,
 										double* coords,
 										AnalysisInfo info)
@@ -73,8 +75,9 @@ void	quadElasticStiffnessMatrix(		double* K,
 	free(B), free(dNdXdY);
 }
 
-
-
+/*!
+ assemble the mass and stiffness matricies for a quadrilateral elastic element
+ */
 void assembleQuadElasticMatricies(	double* K, double* M, 
 									double* verts, int* inds, 
 									AnalysisInfo info)

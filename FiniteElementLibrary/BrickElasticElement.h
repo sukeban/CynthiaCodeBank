@@ -17,7 +17,9 @@
 #include "GeneralFE.h"
 #include "3dElements.h"
 
-
+/*!
+ compute the stiffness matrix for a 3D brick element
+ */
 void	brickElasticStiffnessMatrix(	float* K,
 										float* coords,
 										AnalysisInfo info) 
@@ -73,6 +75,9 @@ void	brickElasticStiffnessMatrix(	float* K,
 	free(dNdXdY);
 }
 
+/*!
+ compute the lumped mass matrix for a 3D elastic element
+ */
 void	brickElasticLumpedMassMatrix(float* M, float* coords, MaterialInfo minfo)
 {
 	float vol = brickVolume(coords);
@@ -82,7 +87,10 @@ void	brickElasticLumpedMassMatrix(float* M, float* coords, MaterialInfo minfo)
 		M[i] += mass;
 }
 
-void assembleBrickElasticMatricies(	float* K, float* M, 
+/*!
+ compute the mass and stiffness matricies for a 3d object
+ */
+void assembleBrickElasticMatricies(	float* K, float* M,
 									float* verts, int* inds, 
 									AnalysisInfo info)
 {

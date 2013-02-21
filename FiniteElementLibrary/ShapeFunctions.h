@@ -17,7 +17,10 @@
 #include "SharedFEData.h" 
 
 #pragma mark ___GaussPoints___
- 
+
+/*!
+ compute the guass points for a quadrilateral element given an n point quadrature rule
+ */
 inline void getGaussPoints(double* points, double* weights, int number)
  { //page 351 reddy
 	switch(number){
@@ -102,7 +105,10 @@ inline void getGaussPoints(double* points, double* weights, int number)
 }
  
  #pragma mark ___ShapeFunctions___
- 
+
+/*!
+ return the shape functions for a line given a polynomial approximation order
+ */
  inline void lineShapeFunctions(double* N, double* dNdSdN, double xi, PolynomialOrderEnum order)
  { // page 346 reddy
   
@@ -147,7 +153,9 @@ inline void getGaussPoints(double* points, double* weights, int number)
 #endif	
  }
 
-
+/*!
+ return the shape functions for a triangle (in barycentric coordinates) given a polynomial approximation order
+ */
 void triangularBaryShapeFunctions(double* N, double* dNdSdN, double xi, double eta, double* coords, PolynomialOrderEnum order)
  {
 	// page 91 kwon (finite element method in matlab)
@@ -190,7 +198,10 @@ void triangularBaryShapeFunctions(double* N, double* dNdSdN, double xi, double e
 	}
  }
  
- void triangularShapeFunctions(double* N, double* dNdSdN, double xi, double eta, PolynomialOrderEnum order)
+/*!
+ return the shape functions for a triangle (in isoparametric coordinates) given a polynomial approximation order
+ */
+void triangularShapeFunctions(double* N, double* dNdSdN, double xi, double eta, PolynomialOrderEnum order)
  {	
  
   // p 171 kwon fea in matlab, get fundamentals book bhatti
@@ -230,7 +241,9 @@ void triangularBaryShapeFunctions(double* N, double* dNdSdN, double xi, double e
 	}
  }
 
-
+/*!
+ return the shape functions for a quadrilateral element (in isoparametric coordinates) given a polynomial approximation order
+ */
 inline  void quadrilateralShapeFunctions(double* N, double* dNdSdN, double xi, double eta, PolynomialOrderEnum order)
  {// page 534 reddy
 	switch (order){
@@ -281,7 +294,9 @@ inline  void quadrilateralShapeFunctions(double* N, double* dNdSdN, double xi, d
  }
  
  
- 
+/*!
+ return the shape functions for a brick element (in isoparametric coordinates) given a polynomial approximation order
+ */
 inline  void brickShapeFunctions(double* N, double* dNdSdN, double xi, double eta, double phi, PolynomialOrderEnum order)
  {
 	switch (order){
@@ -341,10 +356,6 @@ inline  void brickShapeFunctions(double* N, double* dNdSdN, double xi, double et
 		break;
 	}
  }
-
-
-
- 
 
 
 #endif

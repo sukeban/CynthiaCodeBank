@@ -96,7 +96,6 @@ void	quadAcousticStiffnessMatrix(	double* K, double* M,
 				accumulateMass(M, 4, N, sizeN, w[i], w[j], 1.0, detJ);
 				
 			}
-
 		}		
 	}
 	
@@ -156,7 +155,6 @@ void assembleQuadAcousticMatricies(	double* K, double* M,
 
 		assemble(K, M, el, Ke, Me, ginfo, inds);
 	}
-	
 
 	free(Ke), free(Me);
 	free(coords);

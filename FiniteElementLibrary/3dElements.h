@@ -13,14 +13,18 @@
 
 #pragma mark ____Solid___
 
-double brickVolume(double* coords) 
+/*
+ double brickVolume(double* coords)
 {
-	//cbnote compute this
+    //not implemented yet
 	return 0;
 }
- 
+*/ 
 
 #pragma mark ___Tetra___
+/*!
+ compute the center of a tetrahedra. pass in 3d coordinates in an array, get out center in a pre-allocated array
+ */
 void getTetraCenter(double* coords, double* center)
 {
 	center[0] = center[1] = center[2] = 0.0;
@@ -35,7 +39,9 @@ void getTetraCenter(double* coords, double* center)
 	center[2] /= 4.0;
 }
 
-
+/*!
+ compute the volume of a tetrahedra from an array of 3d coordinates
+ */
 double tetraVolume(double* coords) 
 {
 	double x[16];
@@ -61,7 +67,9 @@ double tetraVolume(double* coords)
 	return vol;
 }
 
-
+/*!
+ compute the normal of a tetrahedra base. pass in 3d coordinates in an array, get out normal in a pre-allocated array
+ */
 void tetraBaseNormal(double* coords, double* normal)
 {
    double u[3];
@@ -78,7 +86,10 @@ void tetraBaseNormal(double* coords, double* normal)
    v3_cross(u,v, dir);
    v3_normalize(dir);
 }
- 
+
+/*!
+ compute the center of a tetrahedra base. pass in 3d coordinates in an array, get out center in a pre-allocated array
+ */
 void tetraBaseCenter(double* coords, double* center)
 {
 	int i;
@@ -92,7 +103,11 @@ void tetraBaseCenter(double* coords, double* center)
 	center[1]/=3.0;
 	center[2]/=3.0;
 }
- 
+
+
+/*!
+ test whether the base of the tetrahedra is pointing inwards or outwards from a set of coordinates
+ */
 bool tetraBaseIsFacingInwards(double* coords) 
 {
    double normal[3];
@@ -113,6 +128,9 @@ bool tetraBaseIsFacingInwards(double* coords)
    return 0;
 }
 
+/*!
+ correct the tetrahedra coordinates so that all normals point outwards
+ */
 bool checkTetraElement(double* coords)
 {
 	bool inwards = false;
@@ -139,10 +157,14 @@ bool checkTetraElement(double* coords)
    return inwards;
 }
  
- 
 
 #pragma mark ___General___
 
+/*!
+ compute the Jacobian matrix for a 3d isoparametric element
+ pass in the number of nodes, and the shape function dervitivies, and the coordinates
+ get back the jacobian, the inverse of the jacobian and the determinant. 
+ */
 void threeDJacobian(int numnodes, double* J, double* invJ, double &detJ, double* dNdSdN, double* x)
  {
 	int i;
@@ -182,8 +204,9 @@ void threeDJacobian(int numnodes, double* J, double* invJ, double &detJ, double*
 #endif
  }
 
-
-
+/*!
+ compute the global derivitive matrix for a 3d isoparametric element
+*/
  void threeDPhysicalDerivs(int numnodes, double* dNdXdY, double* invJ, double* dNdSdN)
 {	
 	int i;
@@ -204,6 +227,9 @@ void threeDJacobian(int numnodes, double* J, double* invJ, double &detJ, double*
 
 }
 
+/*!
+ compute the kinematic equation for a 3d isoparametric element
+ */
 void	threeDConstMatrix(int numnodes, double* B, double* dNdXdY)
 {	
 	int i,j;

@@ -23,7 +23,9 @@
 #include "SharedFEData.h"
 #include "CLPKRealMatrixOpsCM.h"
 
-
+/*!
+ compute the length of a line given an array of coordinates
+ */
 double getLineLength(double* coords)
 {
 	double dx = -coords[0] + coords[1];
@@ -36,6 +38,9 @@ double getLineLength(double* coords)
 }
 
 #pragma mark ___Constants____
+/*!
+ compute the material matrix given the material constants for an object
+ */
 inline void	materialMatrix(double* D, MaterialInfo constants)
 {	
 	int i;
@@ -195,6 +200,9 @@ inline void	materialMatrix(double* D, MaterialInfo constants)
 
 
 #pragma mark ___Test___
+/*!
+ test whether a stiffness matrix came back symmetric or not
+ */
 inline void symmetricTest(double* K, int size)
 {
 	//double eps = 1e-2;
@@ -218,7 +226,9 @@ inline void symmetricTest(double* K, int size)
 
 #pragma mark ___GetCoords___
 
-
+/*!
+ grab 3d element coordinates from large coordinates list
+ */
 inline void get3dCoords(double* coords, int id, double* verts, int* inds, GeomInfo ginfo)
 {	
 	int i;
@@ -243,6 +253,9 @@ inline void get3dCoords(double* coords, int id, double* verts, int* inds, GeomIn
 #endif
 }
 
+/*!
+ grab 2d element coordinates from large coordinates list
+ */
 inline void get2dCoords(double* coords, int id, double* verts, int* inds, GeomInfo ginfo)
 {	
 
@@ -266,6 +279,10 @@ inline void get2dCoords(double* coords, int id, double* verts, int* inds, GeomIn
 }
 
 #pragma mark ___GetNormals___
+
+/*!
+ grab 2d element normals from large normals list
+ */
 inline void get2dNormals(double* normals, int id, double* norms, int* inds, GeomInfo ginfo)
 {	
 	printf("\n");
@@ -291,6 +308,9 @@ inline void get2dNormals(double* normals, int id, double* norms, int* inds, Geom
 
 #pragma mark ___Assembly___
 
+/*!
+ determine where to place the infomration in the larger matrix based on vertex index and degrees of freedom
+ */
 inline void findDofs(int* index, int id, int* inds, GeomInfo ginfo)
 {
 	
@@ -315,6 +335,9 @@ inline void findDofs(int* index, int id, int* inds, GeomInfo ginfo)
 	
 }
 
+/*!
+ assemble the smaller matricies stiffness and mass matricies into the larger ones
+ */
 inline void assemble(double* K, double* M, int id, double* Ke, double* Me, GeomInfo ginfo, int* inds)
 {
 	int dofs = ginfo.numnodes*ginfo.nodedofs;
@@ -364,7 +387,9 @@ inline void assemble(double* K, double* M, int id, double* Ke, double* Me, GeomI
 	free(index);
 }
 
-
+/*!
+ compute the mass matrix for a quadrilateral element using consistent mass matrix approach
+ */
 inline void	accumulateMass(	double* M, int sizeM, 
 							double* N, int sizeN[],
 							double wx, double wy, double wz,
@@ -403,12 +428,11 @@ inline void	accumulateMass(	double* M, int sizeM,
 	
 }
 
-
-
-
 #pragma mark ___Constraints___
 
-
+/*!
+ knock out the rows and columns of the stiffness matrix to apply the appropriate boundary conditions
+ */
 void applyBoundaryConditions(double* K, double* M, ConstraintInfo cinfo, int size)
 {
 	int n = cinfo.numconstraints;
@@ -432,6 +456,9 @@ void applyBoundaryConditions(double* K, double* M, ConstraintInfo cinfo, int siz
 */
 }
 
+/*!
+ compress the matricies to remove zero elements from stiffness matrix
+*/
 void removeRowCols(double* K, double* M, double* Knew, double* Mnew, ConstraintInfo cinfo, int size)
 {
 	int n = cinfo.numconstraints;
@@ -494,7 +521,9 @@ void removeRowCols(double* K, double* M, double* Knew, double* Mnew, ConstraintI
 
 }
 
-
+/*!
+ knock out the rows and columns of the hessian matrix to apply the appropriate boundary conditions
+ */
 void applyBoundaryConditionsH(double* H, ConstraintInfo cinfo, int size[])
 {
 	int n = cinfo.numconstraints;
@@ -516,6 +545,9 @@ void applyBoundaryConditionsH(double* H, ConstraintInfo cinfo, int size[])
 */
 }
 
+/*!
+ compress the hessian matrix to remove zero elements from stiffness matrix
+ */
 void removeRowColsH(double* H, double* Hnew,  ConstraintInfo cinfo, int size[])
 {
 	int n = cinfo.numconstraints;

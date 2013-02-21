@@ -571,7 +571,7 @@ void realSingleNonSymmetricEigenDecomp(float* wr, float* wi, float* vr, float*vl
 	// Allocate space for LAPACK to do its computation. 
 	lwork = 32*matSize;
 	work = (float*)malloc( lwork*sizeof(float) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -653,7 +653,7 @@ void realSingleSymmetricGeneralEigenDecomp(float* wr, float* K, float* M, int si
 	// Allocate space for LAPACK to do its computation. 
 	lwork = 32*matSize;
 	work = (float*)malloc( lwork*sizeof(float) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -729,7 +729,7 @@ void realSingleSymmetricEigenDecomp(float* wr, float* lkl, int sizeK)
 	// Allocate space for LAPACK to do its computation. 
 	lwork = 32*matSize;
 	work = (float*)malloc( lwork*sizeof(float) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -819,7 +819,7 @@ void realDoubleNonSymmetricEigenDecomp(double* wr, double* wi, double* vr, doubl
 	// Allocate space for LAPACK to do its computation. 
 	lwork = 32*matSize;
 	work = (double*)malloc( lwork*sizeof(double) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -905,7 +905,7 @@ void realDoubleSymmetricGeneralEigenDecomp(double* wr, double* K, double* M, int
 	// Allocate space for LAPACK to do its computation. 
 	lwork =  32*matSize;
 	work = (double*)malloc( lwork*sizeof(double) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -1012,7 +1012,7 @@ void realDoubleSymmetricGeneralEigenDecompComputeN(double* wr, double* K, double
 	// Allocate space for LAPACK to do its computation. 
 	lwork =  32*matSize;
 	work = (double*)malloc( lwork*sizeof(double) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
@@ -1130,7 +1130,7 @@ void realDoubleSymmetricEigenDecomp(double* wr, double* lkl, int sizeK)
 	// Allocate space for LAPACK to do its computation. 
 	lwork = 32*matSize;
 	work = (double*)malloc( lwork*sizeof(double) );
-	if ( (work==NULL) )	{
+	if ( work==NULL )	{
 		char *memString = "\nBuy more memory!\n";
 		printf(memString);
 		exit(1);
