@@ -13,6 +13,9 @@
 #ifndef ResonatorSharedData_H
 #define ResonatorSharedData_H
 
+/*!
+ a collection of parameter and property definions for the synthesizers using the accelerated resonator objects
+ */
 
 #define LOW_KEY				41			//  these will change depending on the keyboard
 #define NUM_KEYS			10

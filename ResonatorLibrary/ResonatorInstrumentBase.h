@@ -55,6 +55,10 @@ static float kDefaultValue_DeltaSoundScale = 1.0; // cbnote change these from de
 //  the duration of the strike
 
 
+/*!
+ an AUMonotimbralInstrumentBase subclass used to render notes
+ this class is used to register a synthesizer to be used in Audio Unit hosts
+ */
 class ResonatorInstrumentBase : public AUMonotimbralInstrumentBase {
 private:
 

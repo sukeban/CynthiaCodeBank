@@ -261,7 +261,6 @@ ComponentResult		ResonatorInstrumentBase::GetPropertyInfo (	AudioUnitPropertyID	
 				return noErr;	
 			
 
-			
 				
 			case kResonatorProperty_Note:
 				outWritable = false;

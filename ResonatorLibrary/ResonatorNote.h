@@ -15,6 +15,10 @@
 
 class ResonatorInstrumentBase;
 
+/*!
+ an Audio Unit wrapper around a SynthNode object
+ this wrapper is used to render the resonator values
+ */
 class ResonatorNote : public SynthNote{
 public:
 

@@ -19,6 +19,10 @@
 #include "ModelSharedData.h"
 #include "ComplexNumber.h"
 
+/*!
+ a resonator class that contains methods for computing output values using convolution
+ this class has capabilites for setting damping and scale parameters as well as wet/dry mix
+ */
 class AcceleratedConvolutionResonator {
 public:
 

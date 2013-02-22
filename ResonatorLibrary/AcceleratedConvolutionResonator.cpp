@@ -289,9 +289,7 @@ void AcceleratedConvolutionResonator::Process(	const Float32		*inSourceP,
  		vDSP_vmul (fn_l, 1, znew_real_l, 1, u_l,1, nummodespow2);
  						
 		vDSP_sve (u_l, 1, &u_sum, nummodespow2_l); 
-		
-		// cbnote the system can be made simpler if i use the plate elements too
-					
+							
 		(*destP) = (float) (drymix * delta) + (float) (ss*wetmix*u_sum);	
 		destP++;
 		

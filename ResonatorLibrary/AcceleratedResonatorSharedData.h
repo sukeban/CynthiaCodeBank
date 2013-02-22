@@ -14,7 +14,9 @@
 #ifndef AccelaratedResonatorSharedData_H
 #define AccelaratedResonatorSharedData_H
 
-
+/*!
+ a collection of parameter and property definions for the synthesizers using the accelerated resonator objects
+ */
 
 #define LOW_KEY				41			//  these will change depending on the keyboard
 #define NUM_KEYS			10
@@ -24,7 +26,6 @@
 
 #define MIN_AUDIBLE_FREQ	20.0
 #define MAX_AUDIBLE_FREQ	6000.0 //cbnote
-
 
 
 // parameters

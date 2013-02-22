@@ -14,13 +14,11 @@
 #define AccelaratedConvolutionResonatorSharedData_H
 
 
-
 #define MAXNUMTHUMPERS		1
 #define MAXNUMPICKUPS		2
 
 #define MIN_AUDIBLE_FREQ	20.0
 #define MAX_AUDIBLE_FREQ	20000.0
-
 
 
 static CFStringRef kNumberModesParameter = CFSTR("Number Modes");
