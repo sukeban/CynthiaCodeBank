@@ -15,7 +15,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-
+/*!
+ an object that holds the eigendata for an object
+ these eigenvalues represent the resonant frequencies and these eignvectors represent the mode shapes for the object
+ */
 class EigenData {
 
 public:
@@ -61,6 +64,12 @@ public:
 		
 };
 
+/*!
+ an object that stores the geometric information about an object
+ that is the points, faces and normals for use in rendering
+ 
+ this object also defines a set of useful graphics operations like picking on a surface and testing for intersection
+ */
 class GeomData {
 	public:
 

@@ -102,8 +102,6 @@ void GeomData::FlipFace(int i)
 	faces[i+1*numfaces] = node2;
 	faces[i+2*numfaces] = node1;
 	
-	
-					
 }
 
 void GeomData::ComputeFaceCenter(int i, double* center)
@@ -178,7 +176,6 @@ void GeomData::ComputeFaceNormals()
 	}
 }
 
-
 void GeomData::AlignFaces()
 {
 	// for plane objects with zero z dimension
@@ -214,7 +211,6 @@ void GeomData::ComputeOutterFaces()
 	}
 }
 
-	
 #pragma mark ___Verticies___
 void GeomData::ComputeVertexNormals()
 {		
@@ -262,8 +258,6 @@ void GeomData::ComputeVertexNormals()
 #endif	
 	}
 }	
-
-
 
 void GeomData::RemoveStrandedVerticies()
 {
@@ -392,9 +386,6 @@ void GeomData::RemoveStrandedVerticies()
 	free(newverts);
 }
 
-
-
-
 #pragma mark ___Tetras___	
 void GeomData::ComputeTetraCenter(int i, double* center)
 {
@@ -441,7 +432,6 @@ bool GeomData::TetraFaceIsPointingInwards(int ti, int fi)
 	return 0;		
 }
 
-
 int GeomData::getFaceIndex(int node0, int node1, int node2)
 {
 	int j,k;
@@ -472,7 +462,6 @@ int GeomData::getFaceIndex(int node0, int node1, int node2)
 	}
 	
 	return -1;
-
 
 }
 
@@ -519,9 +508,8 @@ void GeomData::CleanTetraModel()
 	}
 }
 
-
 #pragma mark ___Picking___
-// cbnote need a way to fid out if the point is inside a tetra or not
+// cbnote need a way to find out if the point is inside a tetra or not
 bool GeomData::insideTetrahedra(int i, double* intPt)
 {
 	//http://steve.hollasch.net/cgindex/geometry/ptintet.html
@@ -724,7 +712,6 @@ bool GeomData::insideTetrahedra(int i, double* intPt)
 */
 
 
-
 bool GeomData::insideTriangle(int i, double* intPt)
 {
 	
@@ -809,7 +796,6 @@ bool GeomData::insideTriangle(int i, double* intPt)
 	
 }	
 
-
 void GeomData::determinePlaneEquation(int i, double &a, double &b, double &c, double &d)
 {
 	double n0[3];
@@ -859,7 +845,6 @@ bool GeomData::checkFace(int i, double* P1, double* P2, double* intPt)
 		
 	return 0;
 }
-
 
 bool GeomData::checkClosest(double* intPt, double* cIntPt, double* P1)
 {

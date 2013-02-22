@@ -16,7 +16,6 @@
 
 #pragma mark ___2Vector___
 
-
 double v3_squared(double* vec)
 {
 	return vec[0]*vec[0] + vec[1]*vec[1] + vec[2]*vec[2];
@@ -142,7 +141,6 @@ int m3_inverse( double* out, double* in )
 	 out[6] =  ( a12*a23 - a13*a22 ) *invd;
 	 out[7] =  ( a13*a21 - a11*a23 ) *invd;
 	 out[8] =  ( a11*a22 - a12*a21 ) *invd;
-		   
 
 	 return(1);
  }

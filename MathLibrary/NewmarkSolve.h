@@ -7,8 +7,6 @@
  *
  */
 
-
-
 #ifndef NewmarkSolve_H_
 #define NewmarkSolve_H_
 
@@ -240,7 +238,6 @@ void newmarkSteup(	double* Kc, double* Mc,
 	}
 
 	free(temp);
-	
 	
 	free(u_t), free(u_t_dt), free(udot_t), free(udot_t_dt), free(uddot_t), free(uddot_t_dt);
 
