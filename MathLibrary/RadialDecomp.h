@@ -13,18 +13,18 @@
  */
 
 
-
 #include <math.h>
 
 #include <vecLib/clapack.h>
 #include <vecLib/vDSP.h>
 
 
-
 #include "CLPKComplexOpsCM.h"
 #include "CLPKRealMatrixOpsCM.h"
 
-
+/*!
+ build the permutation matrix
+ */
 inline void buildPermutationMatrix(__CLPK_real* perm, int rankPerm, int numLong, int numLat)
 {
 	// make the permutaion matrix
@@ -43,7 +43,9 @@ inline void buildPermutationMatrix(__CLPK_real* perm, int rankPerm, int numLong,
 	*/
 }
 
-
+/*!
+ build the eigenvector permutation matrix
+ */
 inline void buildEvecPermutationMatrix(__CLPK_complex* evecPerm, int rankPerm, __CLPK_complex omega)
 {
 	int i,j,k;
@@ -79,6 +81,9 @@ inline void buildEvecPermutationMatrix(__CLPK_complex* evecPerm, int rankPerm, _
 	
 }
 
+/*!
+ build a rotation matrix
+ */
 inline void buildRotationMatrix(__CLPK_real* Q, int partitions, int rankBlock)
 {
 	// build rotation matrix
@@ -101,7 +106,9 @@ inline void buildRotationMatrix(__CLPK_real* Q, int partitions, int rankBlock)
 	
 }
 
-
+/*!
+ rotate a stiffness matrix in a given direction
+ */
 inline void realSingleRotateMatrixDiag(	__CLPK_real* Knew, 
 										__CLPK_real* Kold, int sizeK, 
 										__CLPK_real* rot, int sizeR,
@@ -193,7 +200,9 @@ inline void realSingleRotateMatrixDiag(	__CLPK_real* Knew,
 #endif
 }
 
-
+/*!
+ recreate the larger eigenvalue vector and the real eigenvectos from the radial decomposition
+ */
 inline void reclaimRealEigenValuesRealEigenVectors( __CLPK_real* evals, __CLPK_real* evalBLOCKS, __CLPK_real *evecBLOCKS, int rankBlock, int rankPerm)
 {	
 	int chunkV = rankBlock*rankBlock; // size of each clump		
@@ -239,6 +248,9 @@ inline void reclaimRealEigenValuesRealEigenVectors( __CLPK_real* evals, __CLPK_r
 	free(inds);	
 }
 
+/*!
+ recreate the larger eigenvalue vector and the complex eigenvectos from the radial decomposition
+ */
 inline void reclaimRealEigenValuesComplexEigenVectors( __CLPK_real* evals, __CLPK_real* evalBLOCKS, __CLPK_complex *evecBLOCKS, int rankBlock, int rankPerm)
 {	
 	int chunkV = rankBlock*rankBlock; // size of each clump		
@@ -292,6 +304,9 @@ inline void reclaimRealEigenValuesComplexEigenVectors( __CLPK_real* evals, __CLP
 	free(inds);	
 }
 
+/*!
+ recreate the larger eigenvector matrix from the axis-symmetric represenation
+ */
 inline void reclaimEigenVectors(__CLPK_real* evecs, __CLPK_complex *evecBLOCKS, int rankBlock, __CLPK_complex* evecPerm, int rankPerm)
 {
 	// get the eigenvectors
@@ -336,7 +351,9 @@ inline void reclaimEigenVectors(__CLPK_real* evecs, __CLPK_complex *evecBLOCKS, 
 	}// no need to noramlize them
 }
 
-
+/*!
+ decompose an axis-symmetric object from the stiffness matricies
+ */
 inline void radialDecompose(float* K11, float* K12, float* K21, int sizeK, 
 							float* evecs, float* evals, 
 							int numLong, int numLat) //num along length
@@ -405,8 +422,6 @@ inline void radialDecompose(float* K11, float* K12, float* K21, int sizeK,
 	}
 #endif	
 	realSingleMakeSingleComplex(OK11, K11, rankBlock);
-
-
 
 	int evalsSize = rankBlock*sizeof(__CLPK_real); 
 	int evecsSize = chunkV*sizeof(__CLPK_complex);

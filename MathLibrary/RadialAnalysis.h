@@ -24,7 +24,9 @@
 #import "TriAxisSymBaryElasticElement.h"
 #import "QuadAxisSymElasticElement.h"
 
-
+/*!
+ compute the eigeninformation for a radially axis-symmetric object
+ */
 inline void radialAnalyze(GeomData* geomdata, EigenData* eigendata, AnalysisInfo info, int rankPerm, int slice)
 							
 {	

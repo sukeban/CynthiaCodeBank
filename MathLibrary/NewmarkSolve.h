@@ -12,11 +12,14 @@
 
 #include "CLPKRealMatrixOpsCM.h"
 
+/*!
+ used for solving acoustic radiation equation using the Newmark method
+ */
 void newmarkSteup(	double* Kc, double* Mc, 
 					double* f0,  double* u0, 
 					int cdofs, 
 					int* bcs, int numbcs, 
-					int numsteps	) //cbnote not much use if u_t doesnt come back out
+					int numsteps	)
 {
 	double dt = 1.0/120.0;
 
