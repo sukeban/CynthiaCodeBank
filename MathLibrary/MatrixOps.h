@@ -92,14 +92,12 @@ int m4_inverse(double* out, double* in );
 #pragma mark Single
 #pragma mark ___2Vector___
 
-
 float v3_squared_f(float* vec);
 float v3_length_f(float* vec);
 void v3_cross_f(float* u, float* v, float* w);
 float v3_dot_f(float* u, float* v);
 void v3_normalize_f(float*u);
 void v3_sub_f(float* u, float* v, float* w);
-
 
 #pragma mark ___VectorMatrixOps___
 

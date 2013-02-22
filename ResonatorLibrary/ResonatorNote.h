@@ -10,6 +10,8 @@
 #ifndef ResonatorNote_H_
 #define ResonatorNote_H_
 
+//http://developer.apple.com/library/mac/#samplecode/CoreAudioUtilityClasses/Listings/CoreAudio_AudioUnits_AUPublic_AUInstrumentBase_AUInstrumentBase_h.html
+
 #include "AUInstrumentBase.h"
 #include "AcceleratedResonator.h"
 

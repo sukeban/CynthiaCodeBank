@@ -8,8 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-
-
+/*!
+ a controller for controlling object material parameters
+*/
 @interface ModalAnalysisController : NSObject {
 	
 	IBOutlet NSObject		*myController; // for telling the au about the picked points

@@ -40,7 +40,6 @@
 	}
 	
 	[self setNeedsDisplay: YES];
-		
 }
 
 - (NSTimer *) timer {
@@ -451,7 +450,6 @@
 	//glEnable(GL_LINE_SMOOTH);
 
 }
-
 
 
 - (void) clearBuffer

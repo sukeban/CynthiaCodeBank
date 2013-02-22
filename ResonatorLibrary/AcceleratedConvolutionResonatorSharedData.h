@@ -13,6 +13,9 @@
 #ifndef AccelaratedConvolutionResonatorSharedData_H
 #define AccelaratedConvolutionResonatorSharedData_H
 
+/*!
+ a collection of parameter and property definions for the synthesizers using the convolution resonator objects
+ */
 
 #define MAXNUMTHUMPERS		1
 #define MAXNUMPICKUPS		2

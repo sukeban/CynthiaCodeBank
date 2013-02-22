@@ -8,7 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-
+/*!
+ an object for controlling the sound rendering parameters
+ */
 @interface SoundRenderingController : NSObject {
 
 	IBOutlet NSObject		*myController; // for telling the au about the picked points
@@ -46,8 +48,6 @@
 - (IBAction) soundScaleChanged: (id) sender;
 - (IBAction) freqScaleChanged: (id) sender;
 - (IBAction) wetDryChanged: (id) sender;
-
-
 
 
 // accessors for ui

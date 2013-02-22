@@ -17,7 +17,6 @@
 	[super dealloc];
 }
 
-
 #pragma mark ___AnalaysisParams___
 
 - (IBAction) thicknessChanged: (id) sender
@@ -126,7 +125,6 @@
 {
 	return poissonsTextField;
 }
-
 
 
 - (NSSlider*) thicknessSlider

@@ -53,6 +53,9 @@ static GLfloat  default_specularIntensity[] =
 static GLfloat  default_spotExponent[] = 
 {0.0f};
 
+/*!
+ a trackball view subclass with more parameters for controlling a 3d model for rendering
+*/
 @interface ResonatorView : AUOpenGLTrackballView {
 	
 	IBOutlet NSObject		*myController; // for telling the au about the picked points

@@ -10,6 +10,10 @@
 
 #include "OpenGLSharedData.h"
 
+/*!
+ a NSOpenGLView subclass used to move the viewing camera around in 3d space
+ */
+
 @interface AUOpenGLTrackballView : NSOpenGLView {
 
 	GLfloat			light_pos[4];
