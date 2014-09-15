@@ -18,4 +18,4 @@ ViewLibrary - a collection of files for viewing 3d models and changing their pro
 
 ===============
 
-Drivers for these libraries are forthcoming.
+Drivers for these libraries are in progress.
